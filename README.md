@@ -1,6 +1,14 @@
+Stable coin that is 
+1. (Relative Stability) Anchored or Peegged -> $1.00
+   1. Chainlink Price feed.
+   2. Set a function to exchange ETH & BTC -> $$$
+2. Stability Mechanism (Minting): Algorithmic (Decentralized)
+   1. People can only mint the stablecoin with enough collateral (coded)
+3. Collateral: Exogenous (Crypto)
+   1. wEth
+   2. wBTC
 
-
-## Foundry
+<!-- ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
 
@@ -65,4 +73,4 @@ $ cast <subcommand>
 $ forge --help
 $ anvil --help
 $ cast --help
-```
+``` -->
