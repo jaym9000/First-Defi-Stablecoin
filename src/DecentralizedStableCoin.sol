@@ -39,7 +39,7 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
  * 
 */
 
-contract DecentralizedStableCoin is ERC20Burnable, Ownable(address(1)) {
+contract DecentralizedStableCoin is ERC20Burnable, Ownable {
     error DecentralizedStableCoin__MustBeMoreThanZero();
     error DecentralizedStableCoin__BurnAmountExceedsBalance();
     error DecentralizedStableCoin__NotZeroAddress();
