@@ -29,7 +29,7 @@ contract DSCEngineTest is Test {
     }
 
     /*//////////////////////////////////////////////////////////////
-                              PRICE TESTS
+    //                          PRICE TESTS                       //
     //////////////////////////////////////////////////////////////*/
     function testGetUsdValue() public {
         uint256 ethAmount = 15e18;
@@ -39,7 +39,7 @@ contract DSCEngineTest is Test {
     }
 
     /*//////////////////////////////////////////////////////////////
-                        DEPOSITCOLLATERAL TESTS
+    //                    DEPOSITCOLLATERAL TESTS                 //
     //////////////////////////////////////////////////////////////*/
 
     function testRevertsIfCollateralZero() public {
