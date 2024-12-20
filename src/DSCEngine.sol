@@ -152,14 +152,26 @@ contract DSCEngine is ReentrancyGuard {
         }
     }
 
-    function redeemCollateralForDsc() external {}
+    /**
+     * @param tokenCollatoralAddress The collatoral address to redeem
+     * @param amountCollatoral The amount of collatoral to redeem
+     * @param amountDscToBurn The amount of DSC to burn
+     * This function burns DSC and redeems underlying collatoral in one transaction
+     */
+    function redeemCollateralForDsc(address tokenCollatoralAddress, uint256 amountCollatoral, uint256 amountDscToBurn)
+        external
+    {
+        burnDsc(amountDscToBurn);
+        redeemCollateral(tokenCollatoralAddress, amountCollatoral);
+        // redeem collatoral already has _revertIfHealthFactorIsBroken(msg.sender);
+    }
 
     // in order to redeem collatoral:
     // 1. Health factor must be over 1 AFTER collateral pulled
     // DRY: Don't repeat yourself
     // CEI: Check, Effects, Interactions
     function redeemCollateral(address tokenCollateralAddress, uint256 amountCollateral)
-        external
+        public
         moreThanZero(amountCollateral)
         nonReentrant
     {
@@ -187,7 +199,15 @@ contract DSCEngine is ReentrancyGuard {
         }
     }
 
-    function burnDsc() external {}
+    function burnDsc(uint256 amount) public moreThanZero(amount) {
+        s_dscMinted[msg.sender] -= amount;
+        bool success = i_dsc.transferFrom(msg.sender, address(this), amount);
+        if (!success) {
+            revert DSCEngine__TransferFailed();
+        }
+        i_dsc.burn(amount);
+        _revertIfHealthFactorIsBroken(msg.sender); // I don't think this will ever hit...
+    }
 
     function liquidate() external {}
 
