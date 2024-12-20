@@ -209,6 +209,7 @@ contract DSCEngine is ReentrancyGuard {
         _revertIfHealthFactorIsBroken(msg.sender); // I don't think this will ever hit...
     }
 
+    // If we do start near undercollatorization, we need someone to liquidate the positions
     function liquidate() external {}
 
     function getHealthFactor() external view {}
