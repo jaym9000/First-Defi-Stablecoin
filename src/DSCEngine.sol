@@ -210,7 +210,20 @@ contract DSCEngine is ReentrancyGuard {
     }
 
     // If we do start near undercollatorization, we need someone to liquidate the positions
-    function liquidate() external {}
+
+    // $100 ETH backing $50 DSC
+    // $20 ETH back $50 DSC <- DSC isn't worth $1!!!
+
+    // $75 backing $50 DSC
+    // liquidator take $75 backing and bruns the $50 DSC
+
+    // If someone is almost undercollatoralized, we will pay you to liquidate them!
+
+    /**
+     * @param collateral The erc20 collateral address to liquidate
+     * @notice they must have more collateral value than the minimum threshold
+     */
+    function liquidate(address collateral, address user, uint256 debtToCover) external {}
 
     function getHealthFactor() external view {}
 
