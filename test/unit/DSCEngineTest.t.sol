@@ -31,7 +31,7 @@ contract DSCEngineTest is Test {
     /*//////////////////////////////////////////////////////////////
     //                          PRICE TESTS                       //
     //////////////////////////////////////////////////////////////*/
-    function testGetUsdValue() public {
+    function testGetUsdValue() public view {
         uint256 ethAmount = 15e18;
         uint256 expectedUsd = 30000e18;
         uint256 actualUsd = dsce.getUsdValue(weth, ethAmount);
