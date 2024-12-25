@@ -7,6 +7,7 @@ import {DecentralizedStableCoin} from "../../src/DecentralizedStableCoin.sol";
 import {DSCEngine} from "../../src/DSCEngine.sol";
 import {HelperConfig} from "../../script/HelperConfig.s.sol";
 import {ERC20Mock} from "@openzeppelin/contracts/mocks/ERC20Mock.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
 contract DSCEngineTest is Test {
     DeployDSC deployer;
@@ -16,10 +17,16 @@ contract DSCEngineTest is Test {
     address ethUsdPriceFeed;
     address btcUsdPriceFeed;
     address weth;
+    address public wbtc;
+    uint256 public deployerKey;
+
+    uint256 amountCollateral = 10 ether;
+    address public user = address(1);
 
     address public USER = makeAddr("users");
     uint256 public constant AMOUNT_COLLATERAL = 10 ether;
     uint256 public constant STARTING_ERC20_BALANCE = 10 ether;
+    uint256 private constant MIN_HEALTH_FACTOR = 1e18;
 
     function setUp() public {
         deployer = new DeployDSC();
@@ -98,4 +105,11 @@ contract DSCEngineTest is Test {
         assertEq(totalDscMinted, expectedTotalDscMinted);
         assertEq(AMOUNT_COLLATERAL, expectedDepositAmount);
     }
+
+    // function testCanDepositedCollateralAndGetAccountInfo() public depositedCollateral {
+    //     (uint256 totalDscMinted, uint256 collateralValueInUsd) = dsce.getAccountInformation(user);
+    //     uint256 expectedDepositedAmount = dsce.getTokenAmountFromUsd(weth, collateralValueInUsd);
+    //     assertEq(totalDscMinted, 0);
+    //     assertEq(expectedDepositedAmount, amountCollateral);
+    // }
 }

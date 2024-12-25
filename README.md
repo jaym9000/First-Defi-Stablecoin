@@ -8,6 +8,13 @@ Stable coin that is
    1. wEth
    2. wBTC
 
+
+- calculate health factor function
+- set health factor if debt is 0
+- Added a bunch of view functions
+
+1. What areour invariants/properties?
+
 <!-- ## Foundry
 
 **Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
