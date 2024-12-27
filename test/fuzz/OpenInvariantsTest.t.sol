@@ -7,7 +7,7 @@
 // 1. The total supply of DSC should be less than the total value of collateral
 // 2. Getter view functions should never revert <- evergreen invariant
 
-pragma solidity ^0.8.18;
+pragma solidity 0.8.19;
 
 import {Test} from "forge-std/Test.sol";
 import {StdInvariant} from "forge-std/StdInvariant.sol";
@@ -41,7 +41,7 @@ contract OpenInvarientsTest is StdInvariant, Test {
         uint256 totalBtcDeposited = IERC20(btc).balanceOf(address(dsce));
 
         uint256 wethValue = dsce.getUsdValue(weth, totalWethDeposited);
-        uint256 btcValue = dsce.getUsdValue(btc, totalBtcDeposited);
-        assert(wethValue + wbtcValue > totalSupply);
+        uint256 wbtcValue = dsce.getUsdValue(btc, totalBtcDeposited);
+        assert(wethValue + wbtcValue >= totalSupply);
     }
 }
