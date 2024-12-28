@@ -1,4 +1,4 @@
-SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: MIT
 
 // Have our invariant aka properties
 
@@ -16,7 +16,7 @@ import {DSCEngine} from "../../src/DSCEngine.sol";
 import {DecentralizedStableCoin} from "../../src/DecentralizedStableCoin.sol";
 import {HelperConfig} from "../../script/HelperConfig.s.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {Handler} from "../../src/Handler.sol";
+import {Handler} from "./Handler.t.sol";
 
 contract Invarients is StdInvariant, Test {
     DeployDSC deployer;
@@ -25,13 +25,16 @@ contract Invarients is StdInvariant, Test {
     HelperConfig config;
     address weth;
     address btc;
+    Handler handler;
 
     function setUp() external {
         // Set up the contract
         deployer = new DeployDSC();
         (dsc, dsce, config) = deployer.run();
         (,, weth, btc,) = config.activeNetworkConfig();
-        targetContract(address(dsce));
+        // targetContract(address(dsce));
+        handler = new Handler(dsce, dsc);
+        targetContract(address(handler));
     }
 
     function invariant_protocolMustHaveMoreValueThanTotalSupply() public view {
